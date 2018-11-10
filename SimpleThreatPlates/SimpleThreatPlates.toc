@@ -1,0 +1,10 @@
+## Interface: 80000
+## Title: Simple Threat Plates
+## Author: Amelia Magee
+## Version: 0.1
+
+## SavedVariables: SimpleThreatPlatesDB
+
+embeds.xml
+
+Core.lua
