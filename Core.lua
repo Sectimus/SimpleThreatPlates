@@ -1,5 +1,6 @@
 STP = LibStub("AceAddon-3.0"):NewAddon("Simple Threat Plates", "AceConsole-3.0")
 STP:RegisterChatCommand("stp", "loadOptions")
+STP:RegisterChatCommand("simplethreatplates", "loadOptions")
 
 options = {
     name = "Simple Threat Plates",
@@ -24,6 +25,18 @@ options = {
             set = 'SetCloseColor',
             get = 'GetCloseColor',
         },
+		offtankcolour = {
+            type = 'color',
+            name = 'Other Tank Has Aggro Plate Colour',
+            set = 'SetOfftankColor',
+            get = 'GetOfftankColor',
+        },
+		nontankcolour = {
+            type = 'color',
+            name = 'Non tank Has Aggro Plate Colour',
+            set = 'SetNontankColor',
+            get = 'GetNontankColor',
+        },
     },
 }
 
@@ -45,10 +58,23 @@ local defaults = {
 				r = 1,
 				g = 1,
 				b = 0
+			},
+			offtank = {
+				r = 0,
+				g = 0.5,
+				b = 1
+			},
+			nontank = {
+				r = 1,
+				g = 0,
+				b = 0
 			}
 		}
 	}	
 }
+
+local tanks = {}
+local nontanks = {}
 
 function STP:OnInitialize()
 	STP:Print("Simple Threat Plates loaded!")
@@ -62,7 +88,39 @@ function STP:OnInitialize()
 
 	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", UpdateThreat)
 	hooksecurefunc("CompactUnitFrame_UpdateAggroFlash", UpdateThreat)
-
+	
+	local frame = CreateFrame("FRAME", "STPAddonFrame");
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
+	frame:RegisterEvent("GROUP_ROSTER_UPDATE");
+	
+	local function checkSpecs(self, event, ...)
+	tanks = {}
+		if IsInRaid() then
+			for i=1, GetNumGroupMembers(), 1 do
+				name = "raid" .. i;
+				if UnitGroupRolesAssigned(name) == "TANK" then
+					if UnitName(name) ~= UnitName("player") then
+						table.insert(tanks, name)
+					end
+				else
+					if UnitName(name) ~= UnitName("player") then
+						table.insert(nontanks, name)
+					end
+				end
+			end
+		else
+			for i=1, GetNumGroupMembers()-1, 1 do
+				name = "party" .. i;
+				if UnitGroupRolesAssigned(name) == "TANK" then
+					table.insert(tanks, name)
+				else 
+					table.insert(nontanks, name)
+				end
+			end
+		end
+	end
+	
+	frame:SetScript("OnEvent", checkSpecs);
 end
 
 function STP:GetDefaultColor(info)
@@ -74,7 +132,6 @@ function STP:SetDefaultColor(t, r, g, b, a)
 	self.db.profile.colours.default.g = g
 	self.db.profile.colours.default.b = b
 	rerunPlates();
-	
 	
 end
 
@@ -100,12 +157,36 @@ function STP:SetCloseColor(t, r, g, b, a)
 	rerunPlates();
 end
 
+function STP:GetOfftankColor(info)
+return self.db.profile.colours.offtank.r, self.db.profile.colours.offtank.g, self.db.profile.colours.offtank.b
+end
+
+function STP:SetOfftankColor(t, r, g, b, a)
+	self.db.profile.colours.offtank.r = r
+	self.db.profile.colours.offtank.g = g
+	self.db.profile.colours.offtank.b = b
+	rerunPlates();
+end
+
+function STP:GetNontankColor(info)
+return self.db.profile.colours.nontank.r, self.db.profile.colours.nontank.g, self.db.profile.colours.nontank.b
+end
+
+function STP:SetNontankColor(t, r, g, b, a)
+	self.db.profile.colours.nontank.r = r
+	self.db.profile.colours.nontank.g = g
+	self.db.profile.colours.nontank.b = b
+	rerunPlates();
+end
+
 function rerunPlates()
 --Rerun all nameplates through UpdateThreat
+if not InCombatLockdown() then
 	table.foreach(C_NamePlate:GetNamePlates(),
 	function(k,v)
 	UpdateThreat(C_NamePlate.GetNamePlateForUnit(v["namePlateUnitToken"])["UnitFrame"])
 	end)
+end
 end
 
 function STP:loadOptions(input)
@@ -118,8 +199,11 @@ end
 
 function UpdateThreat(self)
 	local unit = self.unit
-	if (not unit) or (not UnitIsEnemy(unit,"player")) then return end
-	if not unit:match('nameplate%d?$') then return end
+	--If unit is valid, not an enemy
+	if (not unit) or (not UnitIsEnemy(unit,"player") or UnitIsPlayer(unit)) then 
+		return 
+	end
+	if not unit:match('nameplate%d*') then return end
 	local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
 	if not nameplate then return end
 	local status = UnitThreatSituation("player", unit)
@@ -130,6 +214,21 @@ function UpdateThreat(self)
 	else
 		self.healthBar:SetStatusBarColor(STP:GetDefaultColor())
 	end
+	--Check other tanks.
+	table.foreach(tanks, function(k, v)
+		offtankstatus = UnitThreatSituation(v, unit);
+		if offtankstatus and offtankstatus == 3 then
+			self.healthBar:SetStatusBarColor(STP:GetOfftankColor())
+		end
+	end)
+	
+	table.foreach(nontanks, function(k, v)
+		nontanktankstatus = UnitThreatSituation(v, unit);
+		if nontanktankstatus and nontanktankstatus == 3 then
+			self.healthBar:SetStatusBarColor(STP:GetNontankColor())
+		end
+	end)
+	
 end
 
 

@@ -1,7 +1,8 @@
-## Interface: 80000
+## Interface: 90005
+
 ## Title: Simple Threat Plates
 ## Author: Amelia Magee
-## Version: 0.1
+## Version: 2.0
 
 ## SavedVariables: SimpleThreatPlatesDB
 
