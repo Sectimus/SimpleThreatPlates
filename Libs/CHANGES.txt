@@ -1,111 +1,135 @@
 ------------------------------------------------------------------------
-r1181 | nevcairiel | 2018-07-17 12:42:59 +0000 (Tue, 17 Jul 2018) | 1 line
+r1293 | nevcairiel | 2022-10-22 09:10:10 +0000 (Sat, 22 Oct 2022) | 1 line
 Changed paths:
+   M /trunk
    M /trunk/changelog.txt
 
 Update changelog
 ------------------------------------------------------------------------
-r1180 | nevcairiel | 2018-07-17 12:42:35 +0000 (Tue, 17 Jul 2018) | 1 line
+r1292 | nevcairiel | 2022-09-29 08:00:11 +0000 (Thu, 29 Sep 2022) | 4 lines
 Changed paths:
-   M /trunk/Ace3.toc
+   M /trunk
+   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIContainer-BlizOptionsGroup.lua
 
-Update TOC for 8.0
+AceConfigDialog-3.0: Return a category name on all WoW flavors
+
+On WoW 10.0 this can be passed to Settings.OpenToCategory, on older
+variants InterfaceOptionsFrame_OpenToCategory should accept it equally.
 ------------------------------------------------------------------------
-r1179 | nevcairiel | 2018-07-15 09:03:08 +0000 (Sun, 15 Jul 2018) | 1 line
+r1291 | nevcairiel | 2022-09-29 07:50:10 +0000 (Thu, 29 Sep 2022) | 1 line
 Changed paths:
-   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-CheckBox.lua
+   M /trunk
+   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIContainer-BlizOptionsGroup.lua
 
-AceGUI-3.0: Checkbox: Restore previous width setting, or wrap doesn't work properly
+AceConfigDialog-3.0: Cleanup category handling
 ------------------------------------------------------------------------
-r1178 | nevcairiel | 2018-07-15 08:56:23 +0000 (Sun, 15 Jul 2018) | 1 line
+r1290 | nevcairiel | 2022-09-29 07:40:11 +0000 (Thu, 29 Sep 2022) | 3 lines
 Changed paths:
-   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-CheckBox.lua
+   M /trunk
+   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIContainer-BlizOptionsGroup.lua
 
-AceGUI-3.0: Checkbox: Change internal anchoring to work around a layout issue in WoW 8.0/BfA
+AceConfigDialog-3.0: Update handling of categories for recent 10.0 changes
+
+Fixes WoWAce #605
 ------------------------------------------------------------------------
-r1177 | nevcairiel | 2018-06-25 12:12:48 +0000 (Mon, 25 Jun 2018) | 1 line
+r1289 | nevcairiel | 2022-09-25 16:05:08 +0000 (Sun, 25 Sep 2022) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/README.md
+
+Remove references to the old Ace3 Wiki, as its dead.
+------------------------------------------------------------------------
+r1288 | funkehdude | 2022-09-25 14:19:00 +0000 (Sun, 25 Sep 2022) | 1 line
 Changed paths:
    M /trunk/AceGUI-3.0/AceGUI-3.0.lua
 
-Update TableLayout to a version with less memory requirements
+AceGUI-3.0: Fix a variable that got missed in all the renaming
 ------------------------------------------------------------------------
-r1176 | nevcairiel | 2018-06-23 08:36:22 +0000 (Sat, 23 Jun 2018) | 1 line
+r1287 | nevcairiel | 2022-09-25 09:15:57 +0000 (Sun, 25 Sep 2022) | 1 line
 Changed paths:
+   M /trunk
+   M /trunk/.luacheckrc
+   M /trunk/AceTab-3.0/AceTab-3.0.lua
+   M /trunk/LibStub/LibStub.lua
+
+Few more upvalue tweaks
+------------------------------------------------------------------------
+r1286 | nevcairiel | 2022-09-25 09:15:49 +0000 (Sun, 25 Sep 2022) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/.luacheckrc
    M /trunk/AceGUI-3.0/AceGUI-3.0.lua
-
-AceGUI-3.0: Implement a Table Layout (#442)
-------------------------------------------------------------------------
-r1175 | h.leppkes@gmail.com | 2018-05-15 01:21:47 +0000 (Tue, 15 May 2018) | 1 line
-Changed paths:
-   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-EditBox.lua
-
-AceGUI-3.0: EditBox: Only try to handle dragging if a valid object is being dragged into the text box
-------------------------------------------------------------------------
-r1174 | h.leppkes@gmail.com | 2018-05-14 17:29:49 +0000 (Mon, 14 May 2018) | 1 line
-Changed paths:
-   M /trunk/AceComm-3.0/AceComm-3.0.lua
-
-AceComm-3.0: Support numeric targets for custom channels (Ticket #419)
-------------------------------------------------------------------------
-r1173 | nevcairiel | 2018-04-20 21:27:55 +0000 (Fri, 20 Apr 2018) | 4 lines
-Changed paths:
    M /trunk/AceGUI-3.0/widgets/AceGUIContainer-TreeGroup.lua
 
-AceGUI-3.0: TreeGroup: Work around a lag issue related to TreeGroups in WoW 8.0
-
-Basically, TreeGroups cause a hefty lag spike in RefreshTree if they are a child of UIParent (ie. not in a layout yet), and are not anchored to anything.
-To avoid this spike, skip a refresh in this situation and schedule a new one on the next frame.
+Upvalue a few remaining math functions for consistency
 ------------------------------------------------------------------------
-r1172 | nevcairiel | 2018-04-20 10:57:25 +0000 (Fri, 20 Apr 2018) | 1 line
+r1285 | nevcairiel | 2022-09-25 09:15:41 +0000 (Sun, 25 Sep 2022) | 1 line
 Changed paths:
-   M /trunk/AceComm-3.0/ChatThrottleLib.lua
+   M /trunk
+   A /trunk/.github
+   A /trunk/.github/workflows
+   A /trunk/.github/workflows/ci.yml
+   A /trunk/.github/workflows/pull_request.yml
 
-Missed one spot in ChatThrottleLib
+Add GitHub Actions to run Luacheck
 ------------------------------------------------------------------------
-r1171 | nevcairiel | 2018-04-20 07:33:22 +0000 (Fri, 20 Apr 2018) | 1 line
+r1284 | nevcairiel | 2022-09-25 09:15:30 +0000 (Sun, 25 Sep 2022) | 4 lines
 Changed paths:
+   M /trunk
+   A /trunk/.luacheckrc
+   M /trunk/AceAddon-3.0/AceAddon-3.0.lua
+   M /trunk/AceBucket-3.0/AceBucket-3.0.lua
    M /trunk/AceComm-3.0/AceComm-3.0.lua
-   M /trunk/AceComm-3.0/ChatThrottleLib.lua
-
-Update AceComm and CTL for WoW 8.0
-------------------------------------------------------------------------
-r1170 | funkydude | 2018-03-29 17:38:58 +0000 (Thu, 29 Mar 2018) | 1 line
-Changed paths:
-   M /trunk/AceTimer-3.0/AceTimer-3.0.lua
-
-AceTimer: Initialize the timer table with the majority of values already set, replace some pairs calls with next calls.
-------------------------------------------------------------------------
-r1169 | nevcairiel | 2018-02-27 16:18:28 +0000 (Tue, 27 Feb 2018) | 6 lines
-Changed paths:
+   M /trunk/AceConfig-3.0/AceConfigCmd-3.0/AceConfigCmd-3.0.lua
    M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
-   M /trunk/AceConfig-3.0/AceConfigRegistry-3.0/AceConfigRegistry-3.0.lua
-
-AceConfig-3.0: Allow number values for the "width" parameter, which acts as a multiplier of the default width
-
-A multiplier is used instead of a fixed width in pixels to allow more flexible handling in various AceConfig containers, where default widget width may vary.
-In this design, a numeric value of 0.5 would equal "half", and 2.0 would equal "double", but allowing finer granularity in between as well.
-
-Patch provided by Infus.
-------------------------------------------------------------------------
-r1168 | nevcairiel | 2017-10-01 08:05:04 +0000 (Sun, 01 Oct 2017) | 1 line
-Changed paths:
-   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
-
-AceConfigDialog-3.0: Enable iconCoords for the main level of a tree group (Ticket #417)
-------------------------------------------------------------------------
-r1167 | funkydude | 2017-08-29 22:08:48 +0000 (Tue, 29 Aug 2017) | 1 line
-Changed paths:
-   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
+   M /trunk/AceConsole-3.0/AceConsole-3.0.lua
+   M /trunk/AceDB-3.0/AceDB-3.0.lua
+   M /trunk/AceDBOptions-3.0/AceDBOptions-3.0.lua
+   M /trunk/AceGUI-3.0/AceGUI-3.0.lua
    M /trunk/AceGUI-3.0/widgets/AceGUIContainer-Frame.lua
-   M /trunk/AceGUI-3.0/widgets/AceGUIContainer-TabGroup.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIContainer-TreeGroup.lua
    M /trunk/AceGUI-3.0/widgets/AceGUIContainer-Window.lua
-   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-Button.lua
    M /trunk/AceGUI-3.0/widgets/AceGUIWidget-CheckBox.lua
-   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-DropDown-Items.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-ColorPicker.lua
    M /trunk/AceGUI-3.0/widgets/AceGUIWidget-DropDown.lua
    M /trunk/AceGUI-3.0/widgets/AceGUIWidget-EditBox.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-Keybinding.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-Label.lua
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-MultiLineEditBox.lua
    M /trunk/AceGUI-3.0/widgets/AceGUIWidget-Slider.lua
+   M /trunk/AceHook-3.0/AceHook-3.0.lua
+   M /trunk/AceLocale-3.0/AceLocale-3.0.lua
+   M /trunk/AceSerializer-3.0/AceSerializer-3.0.lua
+   M /trunk/AceTab-3.0/AceTab-3.0.lua
+   M /trunk/AceTimer-3.0/AceTimer-3.0.lua
+   M /trunk/CallbackHandler-1.0/CallbackHandler-1.0.lua
+   M /trunk/LibStub/LibStub.lua
 
-Remove PlaySound compat code.
+Luacheck rules and conformance
+
+Also remove references to the old FindGlobals script, which were not
+maintained for ages, and the role has been taken by Luacheck now.
+------------------------------------------------------------------------
+r1283 | nevcairiel | 2022-09-22 10:25:10 +0000 (Thu, 22 Sep 2022) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/.editorconfig
+   A /trunk/README.md
+
+Add README for GitHub
+------------------------------------------------------------------------
+r1282 | nevcairiel | 2022-09-22 06:10:10 +0000 (Thu, 22 Sep 2022) | 5 lines
+Changed paths:
+   M /trunk
+   M /trunk/AceGUI-3.0/widgets/AceGUIContainer-TabGroup.lua
+
+AceGUI-3.0: TabGroup: Implement tabs without Blizzard Templates
+
+In 10.0.0.45687, the Tab functionality was re-designed, requiring us to
+keep a local copy if we want identical behavior to continue to be
+available in the future.
 ------------------------------------------------------------------------
 
