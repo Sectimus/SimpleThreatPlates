@@ -87,6 +87,7 @@ function STP:OnInitialize()
 	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("Simple Threat Plates", "Simple Threat Plates")
 
 	hooksecurefunc("CompactUnitFrame_OnEvent", UpdateThreat)
+	hooksecurefunc("CompactUnitFrame_RegisterEvents", UpdateThreat)
 
 	local frame = CreateFrame("FRAME", "STPAddonFrame");
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
@@ -198,6 +199,7 @@ function STP:loadOptions(input)
 end
 
 function UpdateThreat(self)
+	print(GetTime())
 	local unit = self.unit
 
 	--If unit is valid, not an enemy
