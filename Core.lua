@@ -199,16 +199,22 @@ function UpdateThreat(self)
 	local unit = self.unit
 
 	--If unit is valid, not an enemy
-	if (not unit) or (not UnitIsEnemy(unit, "player") or UnitIsPlayer(unit)) then
+	if (not unit) or (not UnitIsEnemy(unit, "player") and not UnitCanAttack("player", unit)) or UnitIsPlayer(unit) then
 		return
 	end
-	if not unit:match('nameplate%d*') then return end
 
-	local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
-	if not nameplate then return end
+	if not unit:match('nameplate%d*') then return end
+	if not C_NamePlate.GetNamePlateForUnit(unit) then return end
+
+	local defaultPlateColor = { STP:GetDefaultColor() };
+	--check if it is a neutral mob
+	if (not UnitIsEnemy(unit, "player") and UnitCanAttack("player", unit) and not UnitIsPlayer(unit)) then
+		print("aaaaaaa")
+		defaultPlateColor = { self.healthBar:GetStatusBarColor() };
+	end
 
 	updateNameplateColor("player", self, {
-		default = { STP:GetDefaultColor() },
+		default = defaultPlateColor,
 		close = { STP:GetCloseColor() },
 		temporary = { STP:GetAggroColor() },
 		aggro = { STP:GetAggroColor() }
@@ -245,9 +251,9 @@ function updateNameplateColor(unit, nameplate, statusColorMap)
 	if status == nil then
 		--status could be nil if target not engaged, we can't do anything with that info!
 		--ignore or set the default, but only if we are looking for the player
-		if unit == "player" then
+		if unit == "player" and statusColorMap.default then
 			--if the player themselves is not engaged, then reset the status color
-			nameplate.healthBar:SetStatusBarColor(STP:GetDefaultColor())
+			nameplate.healthBar:SetStatusBarColor(unpack(statusColorMap.default))
 		end
 		return
 	end
