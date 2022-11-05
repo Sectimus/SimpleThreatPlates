@@ -209,7 +209,6 @@ function UpdateThreat(self)
 	local defaultPlateColor = { STP:GetDefaultColor() };
 	--check if it is a neutral mob
 	if (not UnitIsEnemy(unit, "player") and UnitCanAttack("player", unit) and not UnitIsPlayer(unit)) then
-		print("aaaaaaa")
 		defaultPlateColor = { self.healthBar:GetStatusBarColor() };
 	end
 
