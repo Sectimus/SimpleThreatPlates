@@ -193,9 +193,6 @@ end
 function STP:loadOptions(input)
 	STP:Print("Opening options pane.")
 	InterfaceOptionsFrame_OpenToCategory("Simple Threat Plates")
-	InterfaceOptionsFrame_OpenToCategory("Simple Threat Plates")
-	InterfaceOptionsFrame_OpenToCategory("Simple Threat Plates")
-
 end
 
 function UpdateThreat(self)
