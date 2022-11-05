@@ -199,7 +199,6 @@ function STP:loadOptions(input)
 end
 
 function UpdateThreat(self)
-	print(GetTime())
 	local unit = self.unit
 
 	--If unit is valid, not an enemy
