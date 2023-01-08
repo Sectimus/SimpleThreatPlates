@@ -86,8 +86,8 @@ function STP:OnInitialize()
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("Simple Threat Plates", options)
 	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("Simple Threat Plates", "Simple Threat Plates")
 
-	hooksecurefunc("CompactUnitFrame_OnEvent", UpdateThreat)
-	hooksecurefunc("CompactUnitFrame_RegisterEvents", UpdateThreat)
+	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", UpdateThreat)
+	--hooksecurefunc("CompactUnitFrame_RegisterEvents", UpdateThreat)
 
 	local frame = CreateFrame("FRAME", "STPAddonFrame");
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
